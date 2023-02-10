@@ -7,5 +7,19 @@ netty:
       max-order: 3
       
 to-do:
+  config:
+    title-prefix: TODO-
+    title-max-length: 100
+    description-max-length: 250
+    expiry-duration: 24h
+    
+  prop-a: value-a
+  prop-b: value-b
+  prop-c: ${to-do.prop-a},${to-do.prop-b},${to-do.prop-x:default-x}  
+
+  
   service:
     database: false
+    
+
+  
