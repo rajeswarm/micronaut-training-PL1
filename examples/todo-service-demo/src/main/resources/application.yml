@@ -1,6 +1,9 @@
 micronaut:
   application:
     name: todoServiceDemo
+  caches:
+    todo-cache:
+      maximum-size: 20
 netty:
   default:
     allocator:

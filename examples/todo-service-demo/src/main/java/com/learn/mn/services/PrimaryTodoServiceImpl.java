@@ -2,17 +2,18 @@ package com.learn.mn.services;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.micronaut.context.annotation.Bean;
+import com.learn.mn.aop.Traceable;
+
 import io.micronaut.context.annotation.Primary;
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.runtime.http.scope.RequestScope;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.inject.Singleton;
 
-@RequestScope
+@Singleton
 @Primary
 @Requires(property = "to-do.service.database", value = "false")
+@Traceable
 public class PrimaryTodoServiceImpl implements TodoService{
 	
 	private static AtomicInteger TotalInstanceCount = new AtomicInteger(0);
@@ -28,6 +29,12 @@ public class PrimaryTodoServiceImpl implements TodoService{
 
 	@Override
 	public String getTodoList() {
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			
+		}
+		
 		return "My TO-DO list from primary service";
 	}
 	
