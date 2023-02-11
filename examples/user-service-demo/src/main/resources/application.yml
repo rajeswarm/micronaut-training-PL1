@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: userServiceDemo
+  server:
+    port: 8086
+netty:
+  default:
+    allocator:
+      max-order: 3

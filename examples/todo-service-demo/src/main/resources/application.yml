@@ -21,5 +21,19 @@ to-do:
   service:
     database: false
     
+user-service:
+  host: localhost
+  port: 8086
+  url: http://${user-service.host}:${user-service.port}
+  
+micronaut:
+  http:
+    client:
+      read-timeout: 5s
+      pool:
+        enabled: true
+        max-connections: 50
+      
+    
 
   

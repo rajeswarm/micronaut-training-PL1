@@ -1,5 +1,6 @@
 package com.learn.mn.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.learn.mn.errors.NotImplementedException;
@@ -14,5 +15,9 @@ public interface TodoService {
 	
 	default TodoItem createTodoItem(TodoItem todoItem) {
 		throw new NotImplementedException("createTodoItem method is not implemented");
+	}
+	
+	default List<TodoItem> getTodoItemByUserId(String userId) {
+		throw new NotImplementedException("getTodoItemByUserId method is not implemented");
 	}
 }

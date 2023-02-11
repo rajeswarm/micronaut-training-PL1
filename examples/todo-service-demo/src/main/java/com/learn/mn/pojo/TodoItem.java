@@ -12,10 +12,19 @@ public class TodoItem {
 	
 	private String description;
 	
+	private String userId;
+	
 	public TodoItem() {
 	
 	}
 	
+	public TodoItem(@NotBlank String title, String description, String userId) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.userId = userId;
+	}
+
 	public TodoItem(@NotBlank String title, String description) {
 		super();
 		this.title = title;
@@ -33,5 +42,13 @@ public class TodoItem {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }
