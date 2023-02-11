@@ -12,6 +12,16 @@ public class TodoItem {
 	
 	private String description;
 	
+	public TodoItem() {
+	
+	}
+	
+	public TodoItem(@NotBlank String title, String description) {
+		super();
+		this.title = title;
+		this.description = description;
+	}
+	
 	public String getTitle() {
 		return title;
 	}

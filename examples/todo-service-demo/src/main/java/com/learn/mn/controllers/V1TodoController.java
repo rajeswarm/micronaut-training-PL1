@@ -1,15 +1,23 @@
 
 package com.learn.mn.controllers;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.learn.mn.pojo.TodoItem;
 import com.learn.mn.services.TodoService;
 
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -29,8 +37,26 @@ public class V1TodoController {
 	}
 	
 	@Post(consumes = MediaType.APPLICATION_JSON, produces = MediaType.TEXT_PLAIN)
+	@ExecuteOn(value = TaskExecutors.IO)
 	public String createTodoItem(@Valid TodoItem todoItem) {
+		primaryTodoService.createTodoItem(todoItem);
+		
 		return "Created TO-DO Item with Title: "+ todoItem.getTitle();
+	}
+	
+	@Get(produces = MediaType.APPLICATION_JSON, uri = "/{id}")
+	public Response getTodoItemById(@PathParam("id") int id, HttpRequest<?> request) {
+		
+		String correlationId = request.getAttribute("correlationId").get().toString();
+		System.out.println("Correlation Id in Request Attribute: "+ correlationId);
+		
+		Optional<TodoItem> todoItemOptional = primaryTodoService.getTodoItem(id);
+		
+		if(todoItemOptional.isPresent()) {
+			return Response.ok(todoItemOptional.get()).build();
+		}
+		
+		return Response.status(Status.NOT_FOUND).build();
 	}
 
 }
