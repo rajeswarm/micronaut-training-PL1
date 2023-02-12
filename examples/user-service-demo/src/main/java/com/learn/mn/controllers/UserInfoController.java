@@ -19,6 +19,11 @@ public class UserInfoController {
 	@Inject
 	UserInfoService userInfoService;
 	
+	/**
+	 * Returns userInfo based on userId parameter
+	 * @param userId
+	 * @return
+	 */
 	@Get(produces = MediaType.APPLICATION_JSON, uri = "/{userId}")
 	public Response getByUserId(@PathParam("userId") String userId) {
 		UserInfo userInfo = userInfoService.getByUserId(userId);
@@ -29,6 +34,11 @@ public class UserInfoController {
 		return Response.noContent().build();
 	}
 	
+	/**
+	 * Creates a new userInfo object
+	 * @param userInfo
+	 * @return
+	 */
 	@Post(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
 	public UserInfo createUserInfo(@Valid UserInfo userInfo) {
 		return userInfoService.createUserInfo(userInfo);

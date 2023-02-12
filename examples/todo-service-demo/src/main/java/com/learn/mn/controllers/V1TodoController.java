@@ -8,6 +8,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.learn.mn.pojo.TodoItem;
 import com.learn.mn.services.TodoService;
 
@@ -24,6 +27,8 @@ import jakarta.inject.Named;
 @Controller("/todo/v1")
 public class V1TodoController {
 	
+	Logger logger = LoggerFactory.getLogger(V1TodoController.class);
+	
 	@Inject
 	@Named(value = "v1")
 	private TodoService v1TodoService;
@@ -39,9 +44,15 @@ public class V1TodoController {
 	@Post(consumes = MediaType.APPLICATION_JSON, produces = MediaType.TEXT_PLAIN)
 	@ExecuteOn(value = TaskExecutors.IO)
 	public String createTodoItem(@Valid TodoItem todoItem) {
-		primaryTodoService.createTodoItem(todoItem);
 		
-		return "Created TO-DO Item with Title: "+ todoItem.getTitle();
+		logger.info("Executing V1TodoController.createTodoItem() method");
+		
+		try {
+			primaryTodoService.createTodoItem(todoItem);
+			return "Created TO-DO Item with Title: " + todoItem.getTitle();
+		} finally {
+			logger.info("Completed V1TodoController.createTodoItem() method");
+		}
 	}
 	
 	@Get(produces = MediaType.APPLICATION_JSON, uri = "/{id}")

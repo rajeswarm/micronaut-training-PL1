@@ -3,7 +3,13 @@ micronaut:
     name: userServiceDemo
   server:
     port: 8086
+  router:
+        static-resources:
+            swagger:
+                paths: classpath:META-INF/swagger
+                mapping: /swagger/**
 netty:
   default:
     allocator:
       max-order: 3
+    

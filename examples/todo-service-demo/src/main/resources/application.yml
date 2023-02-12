@@ -33,7 +33,10 @@ micronaut:
       pool:
         enabled: true
         max-connections: 50
-      
+logger:
+  levels:
+    com.learn.mn.controllers.V1TodoController: INFO
+    
     
 
   
