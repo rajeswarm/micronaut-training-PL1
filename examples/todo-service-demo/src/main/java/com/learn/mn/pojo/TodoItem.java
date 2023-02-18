@@ -1,5 +1,7 @@
 package com.learn.mn.pojo;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 
 import io.micronaut.core.annotation.Introspected;
@@ -13,6 +15,10 @@ public class TodoItem {
 	private String description;
 	
 	private String userId;
+
+	private int id;
+	
+	private Date targetDate;
 	
 	public TodoItem() {
 	
@@ -50,5 +56,22 @@ public class TodoItem {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getTargetDate() {
+		return targetDate;
+	}
+
+	public void setTargetDate(Date targetDate) {
+		this.targetDate = targetDate;
 	}
 }

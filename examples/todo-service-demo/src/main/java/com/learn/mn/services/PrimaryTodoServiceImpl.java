@@ -31,17 +31,6 @@ public class PrimaryTodoServiceImpl implements TodoService{
 		
 		System.out.println("PrimaryTodoServiceImpl Total Instance Count: "+ TotalInstanceCount.intValue());
 	}
-
-	@Override
-	public String getTodoList() {
-		try {
-			Thread.sleep(50);
-		} catch (InterruptedException e) {
-			
-		}
-		
-		return "My TO-DO list from primary service";
-	}
 	
 	@Override
 	public Optional<TodoItem> getTodoItem(int id) {

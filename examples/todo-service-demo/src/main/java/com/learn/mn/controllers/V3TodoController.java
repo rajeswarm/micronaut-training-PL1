@@ -1,6 +1,7 @@
 
 package com.learn.mn.controllers;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 
@@ -11,7 +12,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.reactivestreams.Publisher;
 
-import com.learn.mn.errors.NotImplementedException;
 import com.learn.mn.pojo.TodoItem;
 import com.learn.mn.services.TodoService;
 
@@ -20,7 +20,6 @@ import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Error;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.scheduling.TaskExecutors;
@@ -46,8 +45,8 @@ public class V3TodoController {
 	@Inject
 	private TodoService primaryTodoService;
 
-	@Get(produces = MediaType.TEXT_PLAIN)
-	public String getToDoList() {
+	@Get(produces = MediaType.APPLICATION_JSON)
+	public List<TodoItem> getToDoList() {
 		return v3TodoService.getTodoList();
 	}
 

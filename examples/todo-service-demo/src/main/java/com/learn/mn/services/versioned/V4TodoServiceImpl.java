@@ -29,8 +29,8 @@ public class V4TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public String getTodoList() {
-		return todoItemsMap.values().toString();
+	public List<TodoItem> getTodoList() {
+		return todoItemsMap.values().stream().collect(Collectors.toList());
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class V4TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public List<TodoItem> getTodoItemByUserId(String userId) {
+	public List<TodoItem> getTodoListByUserId(String userId) {
 		return todoItemsMap.values().stream().filter(t -> t.getUserId().equals(userId)).collect(Collectors.toList());
 	}
 	

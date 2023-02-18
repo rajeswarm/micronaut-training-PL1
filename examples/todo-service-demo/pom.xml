@@ -100,6 +100,32 @@
 			<artifactId>micronaut-micrometer-registry-statsd</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.micronaut.data</groupId>
+			<artifactId>micronaut-data-jdbc</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.micronaut.sql</groupId>
+			<artifactId>micronaut-jdbc-hikari</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>3.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>io.micronaut.test</groupId>
 			<artifactId>micronaut-test-junit5</artifactId>
 			<scope>test</scope>
@@ -142,6 +168,11 @@
 							<groupId>io.micronaut.jaxrs</groupId>
 							<artifactId>micronaut-jaxrs-processor</artifactId>
 							<version>${micronaut.jaxrs.version}</version>
+						</path>
+						<path>
+							<groupId>io.micronaut.data</groupId>
+							<artifactId>micronaut-data-processor</artifactId>
+							<version>${micronaut.data.version}</version>
 						</path>
 					</annotationProcessorPaths>
 					<compilerArgs>

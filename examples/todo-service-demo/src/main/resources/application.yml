@@ -19,7 +19,7 @@ to-do:
   prop-b: value-b
   prop-c: ${to-do.prop-a},${to-do.prop-b},${to-do.prop-x:default-x}  
   service:
-    database: false
+    database: true
     
 user-service:
   host: localhost
@@ -80,6 +80,18 @@ endpoints:
 info:
    todo:
       sample-key:sample-value
+      
+datasources:
+  default:
+    dialect: MYSQL
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/todo-services-sample
+    username: todo-svc-user
+    password: ABC123abc
+    
+jackson:
+    serialization:
+        writeDatesAsTimestamps: false
 
     
 

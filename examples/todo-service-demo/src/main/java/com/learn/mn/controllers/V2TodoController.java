@@ -1,6 +1,7 @@
 
 package com.learn.mn.controllers;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,8 +33,8 @@ public class V2TodoController {
 	@Inject
 	private TodoService primaryTodoService;
 
-	@Get(produces = MediaType.TEXT_PLAIN)
-	public String getToDoList() {
+	@Get(produces = MediaType.APPLICATION_JSON)
+	public List<TodoItem> getToDoList() {
 		return v2TodoService.getTodoList();
 	}
 

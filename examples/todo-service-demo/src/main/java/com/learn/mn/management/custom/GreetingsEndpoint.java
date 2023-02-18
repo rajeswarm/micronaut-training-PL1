@@ -4,6 +4,7 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Delete;
 import io.micronaut.management.endpoint.annotation.Endpoint;
 import io.micronaut.management.endpoint.annotation.Read;
+import io.micronaut.management.endpoint.annotation.Sensitive;
 import io.micronaut.management.endpoint.annotation.Write;
 
 @Endpoint(id = "greetings", defaultSensitive = false)
@@ -17,6 +18,7 @@ public class GreetingsEndpoint {
 	}
 	
 	@Write(consumes = MediaType.TEXT_PLAIN)
+	@Sensitive(value = true)
 	public void updateGreetingsMessage(String message) {
 		this.greetingsMessage = message;
 	}

@@ -5,8 +5,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import com.learn.mn.client.UserServiceClient;
 import com.learn.mn.pojo.TodoItemForUserResponse;
@@ -21,11 +19,8 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.http.uri.UriBuilder;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Controller("/todo/v5")
 public class V5TodoController {
@@ -55,7 +50,7 @@ public class V5TodoController {
 
 	@Get(produces = MediaType.APPLICATION_JSON)
 	public Publisher<TodoItemForUserResponse> getTodoForUser(@QueryParam("userId") String userId) {
-		var todoItems = v4TodoService.getTodoItemByUserId(userId);
+		var todoItems = v4TodoService.getTodoListByUserId(userId);
 
 		return Publishers.map(getUserInfo(userId), u -> {
 			TodoItemForUserResponse todoItemForUserResponse = new TodoItemForUserResponse();

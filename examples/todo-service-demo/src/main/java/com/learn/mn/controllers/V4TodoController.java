@@ -59,7 +59,7 @@ public class V4TodoController {
 		TodoItemForUserResponse todoItemForUserResponse = new TodoItemForUserResponse();
 		String correlationId = request.getAttribute("correlationId").toString();
 
-		var todoItems = v4TodoService.getTodoItemByUserId(userId);
+		var todoItems = v4TodoService.getTodoListByUserId(userId);
 		var userInfo = getUserInfoBlocking(userId, correlationId);
 
 		todoItemForUserResponse.setTodoItems(todoItems);
