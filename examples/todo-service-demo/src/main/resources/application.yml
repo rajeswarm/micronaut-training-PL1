@@ -36,7 +36,51 @@ micronaut:
 logger:
   levels:
     com.learn.mn.controllers.V1TodoController: INFO
+
+endpoints:
+  greetings:
+    enabled: true
+    sensitive: false
+  env:
+    enabled: true
+    sensitive: false
+  stop:
+    enabled: true
+    sensitive: false
+  loggers:
+    enabled: true
+    sensitive: false
+  routes:
+    enabled: true
+    sensitive: false
+  refresh:
+    enabled: true
+    sensitive: false
+  metrics:
+    enabled: true
+    sensitive: false
+  health:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS
+    #status:
+    #  http-mapping: 
+        # DOWN: 200
+  info:
+    enabled: true
+    sensitive: false
+    config:
+      enabled: true
+    git:
+       enabled: true
+  beans:
+    enabled: true
+    sensitive: false
     
+info:
+   todo:
+      sample-key:sample-value
+
     
 
   
