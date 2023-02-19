@@ -1,35 +1,51 @@
 package com.learn.mn.services;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.transaction.Transactional;
 
+import org.reactivestreams.Publisher;
+
+import com.learn.mn.domain.UserInfoEntity;
 import com.learn.mn.pojo.UserInfo;
+import com.learn.mn.repositories.UserInfoRepository;
 
-import jakarta.annotation.PostConstruct;
+import io.micronaut.core.async.publisher.Publishers;
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class UserInfoServiceImpl implements UserInfoService {
+class UserInfoServiceImpl implements UserInfoService {
 
-	private Map<String, UserInfo> userInfoMap = new HashMap<>();
-
-	@PostConstruct
-	void onCreated() {
-		for (int i = 1; i <= 3; i++) {
-			String userId = String.valueOf(i);
-			userInfoMap.put(userId, new UserInfo(userId, String.format("User " + userId)));
-		}
-	}
+	@Inject
+	UserInfoRepository userInfoRepository;
 
 	@Override
-	public UserInfo getByUserId(String userId) {
-		return userInfoMap.get(userId);
+	public Publisher<UserInfo> getByUserId(String userId) {
+		return Publishers.map(userInfoRepository.findById(userId), e -> {
+			return mapEntityToPojo(e);
+		});
 	}
 
-	@Override
-	public UserInfo createUserInfo(UserInfo userInfo) {
-		userInfoMap.put(userInfo.getUserId(), userInfo);
+	private UserInfo mapEntityToPojo(UserInfoEntity e) {
+		UserInfo userInfo = new UserInfo(e.getUserId(), e.getName());
 		return userInfo;
+	}
+
+	@Override
+	public Publisher<UserInfo> createUserInfo(UserInfo userInfo) {
+		UserInfoEntity userInfoEntity = new UserInfoEntity();
+		userInfoEntity.setUserId(userInfo.getUserId());
+		userInfoEntity.setName(userInfo.getName());
+
+		return Publishers.map(userInfoRepository.save(userInfoEntity), e -> {
+			return mapEntityToPojo(e);
+		});
+	}
+
+	@Override
+	public Publisher<UserInfo> getAllUsers() {
+		return Publishers.map(userInfoRepository.findAll(), e -> {
+			return mapEntityToPojo(e);
+		});
 	}
 
 }

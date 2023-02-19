@@ -2,11 +2,13 @@ package com.learn.mn.controllers;
 
 import javax.validation.Valid;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Response;
+
+import org.reactivestreams.Publisher;
 
 import com.learn.mn.pojo.UserInfo;
 import com.learn.mn.services.UserInfoService;
 
+import io.micronaut.core.async.annotation.SingleResult;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -19,19 +21,20 @@ public class UserInfoController {
 	@Inject
 	UserInfoService userInfoService;
 	
+	@Get(produces = MediaType.APPLICATION_JSON)
+	public Publisher<UserInfo> getAllUsers() {
+		return userInfoService.getAllUsers();
+	}
+	
 	/**
 	 * Returns userInfo based on userId parameter
 	 * @param userId
 	 * @return
 	 */
 	@Get(produces = MediaType.APPLICATION_JSON, uri = "/{userId}")
-	public Response getByUserId(@PathParam("userId") String userId) {
-		UserInfo userInfo = userInfoService.getByUserId(userId);
-		if(userInfo != null) {
-			return Response.ok(userInfo).build();
-		}
-		
-		return Response.noContent().build();
+	@SingleResult
+	public Publisher<UserInfo> getByUserId(@PathParam("userId") String userId) {
+		return userInfoService.getByUserId(userId);
 	}
 	
 	/**
@@ -40,7 +43,8 @@ public class UserInfoController {
 	 * @return
 	 */
 	@Post(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-	public UserInfo createUserInfo(@Valid UserInfo userInfo) {
+	@SingleResult
+	public Publisher<UserInfo> createUserInfo(@Valid UserInfo userInfo) {
 		return userInfoService.createUserInfo(userInfo);
 	}
 
