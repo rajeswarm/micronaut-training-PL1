@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: todoServiceDemo
+    name: todo-service-demo
   caches:
     todo-cache:
       maximum-size: 20
@@ -26,13 +26,11 @@ user-service:
   port: 8086
   url: http://${user-service.host}:${user-service.port}
   
-micronaut:
-  http:
-    client:
-      read-timeout: 5s
-      pool:
-        enabled: true
-        max-connections: 50
+event-service:
+  host: localhost
+  port: 8087
+  url: http://${event-service.host}:${event-service.port}
+
 logger:
   levels:
     com.learn.mn.controllers.V1TodoController: INFO
@@ -92,7 +90,9 @@ datasources:
 jackson:
     serialization:
         writeDatesAsTimestamps: false
-
-    
-
-  
+        
+consul:
+  client:
+    defaultZone: ${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}
+    registration:
+      enabled: true

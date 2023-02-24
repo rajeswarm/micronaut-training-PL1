@@ -1,0 +1,15 @@
+micronaut:
+  application:
+    name: event-service-demo
+  server:
+    port: 8087
+netty:
+  default:
+    allocator:
+      max-order: 3
+      
+consul:
+  client:
+    defaultZone: ${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}
+    registration:
+      enabled: true

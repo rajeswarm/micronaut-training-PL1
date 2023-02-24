@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.learn.mn</groupId>
-	<artifactId>user-service-demo</artifactId>
+	<artifactId>event-service-demo</artifactId>
 	<version>0.1</version>
 	<packaging>${packaging}</packaging>
 	<parent>
@@ -52,79 +52,19 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>io.micronaut.jaxrs</groupId>
-			<artifactId>micronaut-jaxrs-server</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.micronaut.reactor</groupId>
-			<artifactId>micronaut-reactor</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.micronaut.reactor</groupId>
-			<artifactId>micronaut-reactor-http-client</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.annotation</groupId>
-			<artifactId>jakarta.annotation-api</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-annotations</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.annotation</groupId>
-			<artifactId>jakarta.annotation-api</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.persistence</groupId>
-			<artifactId>jakarta.persistence-api</artifactId>
-			<version>3.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.micronaut.data</groupId>
-			<artifactId>micronaut-data-r2dbc</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>dev.miku</groupId>
-			<artifactId>r2dbc-mysql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.r2dbc</groupId>
-			<artifactId>r2dbc-pool</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.micronaut.data</groupId>
-			<artifactId>micronaut-data-mongodb</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongodb-driver-reactivestreams</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>io.micronaut.discovery</groupId>
 			<artifactId>micronaut-discovery-client</artifactId>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.micronaut.test</groupId>
@@ -165,30 +105,10 @@
 							<artifactId>micronaut-http-validation</artifactId>
 							<version>${micronaut.version}</version>
 						</path>
-						<path>
-							<groupId>io.micronaut.jaxrs</groupId>
-							<artifactId>micronaut-jaxrs-processor</artifactId>
-							<version>${micronaut.jaxrs.version}</version>
-						</path>
-						<path>
-							<groupId>io.micronaut.openapi</groupId>
-							<artifactId>micronaut-openapi</artifactId>
-							<version>${micronaut.openapi.version}</version>
-						</path>
-						<path>
-							<groupId>io.micronaut.data</groupId>
-							<artifactId>micronaut-data-processor</artifactId>
-							<version>${micronaut.data.version}</version>
-						</path>
-						<path>
-							<groupId>io.micronaut.data</groupId>
-							<artifactId>micronaut-data-document-processor</artifactId>
-							<version>${micronaut.data.version}</version>
-						</path>
 					</annotationProcessorPaths>
 					<compilerArgs>
 						<arg>-Amicronaut.processing.group=com.learn.mn</arg>
-						<arg>-Amicronaut.processing.module=user-service-demo</arg>
+						<arg>-Amicronaut.processing.module=event-service-demo</arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>

@@ -21,11 +21,11 @@ public class V4TodoServiceImpl implements TodoService {
 
 	@PostConstruct
 	void onCreated() {
-		todoItemsMap.put(1, new TodoItem("User 1 Todo 1", "Description 1", "1"));
-		todoItemsMap.put(2, new TodoItem("User 1 Todo 2", "Description 2", "1"));
-		todoItemsMap.put(3, new TodoItem("User 2 Todo 3", "Description 3", "2"));
-		todoItemsMap.put(4, new TodoItem("User 2 Todo 4", "Description 4", "2"));
-		todoItemsMap.put(5, new TodoItem("User 3 Todo 5", "Description 5", "3"));
+		todoItemsMap.put(1, new TodoItem(1, "User A Todo 1", "Description 1", "usera" , "event-1"));
+		todoItemsMap.put(2, new TodoItem(2, "User A Todo 2", "Description 2", "usera", "event-1"));
+		todoItemsMap.put(3, new TodoItem(3, "User B Todo 3", "Description 3", "userb", "event-2"));
+		todoItemsMap.put(4, new TodoItem(4, "User B Todo 4", "Description 4", "userb", "event-2"));
+		todoItemsMap.put(5, new TodoItem(5, "User A Todo 5", "Description 5", "usera", "event-3"));
 	}
 
 	@Override

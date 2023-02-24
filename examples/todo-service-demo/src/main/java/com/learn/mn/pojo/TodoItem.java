@@ -8,22 +8,33 @@ import io.micronaut.core.annotation.Introspected;
 
 @Introspected
 public class TodoItem {
-	
+
 	@NotBlank
 	private String title;
-	
+
 	private String description;
-	
+
 	private String userId;
 
 	private int id;
-	
+
 	private Date targetDate;
-	
+
+	private String eventId;
+
 	public TodoItem() {
-	
+
 	}
-	
+
+	public TodoItem(int id, @NotBlank String title, String description, String userId, String eventId) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.userId = userId;
+		this.id = id;
+		this.eventId = eventId;
+	}
+
 	public TodoItem(@NotBlank String title, String description, String userId) {
 		super();
 		this.title = title;
@@ -36,16 +47,19 @@ public class TodoItem {
 		this.title = title;
 		this.description = description;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -57,8 +71,7 @@ public class TodoItem {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	
+
 	public int getId() {
 		return id;
 	}
@@ -73,5 +86,13 @@ public class TodoItem {
 
 	public void setTargetDate(Date targetDate) {
 		this.targetDate = targetDate;
+	}
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
 	}
 }

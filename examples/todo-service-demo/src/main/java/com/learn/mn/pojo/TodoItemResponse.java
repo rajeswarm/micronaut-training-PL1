@@ -7,6 +7,8 @@ public class TodoItemResponse {
 	
 	private TodoItem todoItem;
 	private UserInfo userInfo;
+	private CalendarEvent event;
+	
 	public TodoItem getTodoItem() {
 		return todoItem;
 	}
@@ -18,6 +20,12 @@ public class TodoItemResponse {
 	}
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+	}
+	public CalendarEvent getEvent() {
+		return event;
+	}
+	public void setEvent(CalendarEvent event) {
+		this.event = event;
 	}
 	
 	

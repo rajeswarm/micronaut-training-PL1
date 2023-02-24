@@ -6,13 +6,16 @@ import javax.ws.rs.QueryParam;
 
 import org.reactivestreams.Publisher;
 
+import com.learn.mn.client.EventServiceClient;
 import com.learn.mn.client.UserServiceClient;
+import com.learn.mn.pojo.CalendarEvent;
 import com.learn.mn.pojo.TodoItemForUserResponse;
 import com.learn.mn.pojo.TodoItemRequest;
 import com.learn.mn.pojo.TodoItemResponse;
 import com.learn.mn.pojo.UserInfo;
 import com.learn.mn.services.TodoService;
 
+import io.micronaut.core.async.annotation.SingleResult;
 import io.micronaut.core.async.publisher.Publishers;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MediaType;
@@ -21,6 +24,9 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.inject.Singleton;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Controller("/todo/v5")
 public class V5TodoController {
@@ -32,8 +38,15 @@ public class V5TodoController {
 	@Inject
 	UserServiceClient userServiceClient;
 
+	@Inject
+	EventServiceClient eventServiceClient;
+
 	@Get(produces = MediaType.APPLICATION_JSON, uri = "/{id}")
-	public Publisher<TodoItemResponse> getTodoById(@PathParam("id") int id) {
+	@SingleResult
+	public Publisher<TodoItemResponse> getTodoById(@PathParam("id") int id, HttpRequest<?> request) {
+
+		String correlationId = request.getAttribute("correlationId").toString();
+
 		TodoItemResponse response = new TodoItemResponse();
 
 		var todoItemOptional = v4TodoService.getTodoItem(id);
@@ -42,10 +55,13 @@ public class V5TodoController {
 			response.setTodoItem(todoItem);
 		}
 
-		return Publishers.map(getUserInfo(response.getTodoItem().getUserId()), u -> {
+		return Flux.from(getUserInfo(response.getTodoItem().getUserId()).flatMap(u -> {
 			response.setUserInfo(u);
-			return response;
-		});
+			return Flux.from(getEvent(response.getTodoItem().getEventId(), correlationId)).map(e -> {
+				response.setEvent(e);
+				return response;
+			}).next();
+		}));
 	}
 
 	@Get(produces = MediaType.APPLICATION_JSON)
@@ -77,11 +93,15 @@ public class V5TodoController {
 		});
 	}
 
-	private Publisher<UserInfo> getUserInfo(String userId) {
+	private Mono<UserInfo> getUserInfo(String userId) {
 		return userServiceClient.getUserInfoById(userId);
 	}
 
-	private Publisher<UserInfo> createUserInfo(UserInfo userInfo, String correlationId) {
+	private Mono<UserInfo> createUserInfo(UserInfo userInfo, String correlationId) {
 		return userServiceClient.createUserInfo(userInfo, correlationId);
+	}
+
+	private Mono<CalendarEvent> getEvent(String eventId, String correlationId) {
+		return eventServiceClient.getEventById(eventId, correlationId);
 	}
 }

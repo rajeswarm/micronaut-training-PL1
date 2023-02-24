@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: userServiceDemo
+    name: user-service-demo
   server:
     port: 8086
   router:
@@ -25,4 +25,11 @@ r2dbc:
       password: ABC123abc
 
 mongodb:
-  uri: mongodb://localhost:27017/todo-services-demo    
+  uri: mongodb://localhost:27017/todo-services-demo
+  
+  
+consul:
+  client:
+    defaultZone: ${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}
+    registration:
+      enabled: true
