@@ -8,7 +8,7 @@ micronaut:
     reject-not-found: false
     redirect:
       enabled: false
-    authentication: session
+    authentication: bearer
     token:
       jwt:
         generator:

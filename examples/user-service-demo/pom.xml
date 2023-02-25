@@ -140,16 +140,16 @@
 			<artifactId>micronaut-security</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+		<!--		<dependency>
 			<groupId>io.micronaut.security</groupId>
 			<artifactId>micronaut-security-session</artifactId>
 			<scope>compile</scope>
-		</dependency>
-<!--		<dependency>
+		</dependency>-->
+		<dependency>
 			<groupId>io.micronaut.security</groupId>
 			<artifactId>micronaut-security-jwt</artifactId>
 			<scope>compile</scope>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>io.micronaut.test</groupId>
 			<artifactId>micronaut-test-junit5</artifactId>
