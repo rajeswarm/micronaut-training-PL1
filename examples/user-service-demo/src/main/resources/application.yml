@@ -3,6 +3,23 @@ micronaut:
     name: user-service-demo
   server:
     port: 8086
+  security:
+    enabled: true
+    reject-not-found: false
+    redirect:
+      enabled: false
+    authentication: session
+    token:
+      jwt:
+        generator:
+          access-token:
+            expiration: 60
+          refresh-token:
+            secret: "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"
+  caches:
+   refresh-token: 
+     charset: 'UTF-8'
+     expire-after-write: 5m
   router:
         static-resources:
             swagger:
@@ -27,9 +44,3 @@ r2dbc:
 mongodb:
   uri: mongodb://localhost:27017/todo-services-demo
   
-  
-consul:
-  client:
-    defaultZone: ${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}
-    registration:
-      enabled: true
