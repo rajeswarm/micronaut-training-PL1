@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.learn.mn
+testFramework: spock
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, http-client, java, java-application, logback, maven, netty-server, readme, serialization-jackson, shade, spock, yaml]
